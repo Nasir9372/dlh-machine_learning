@@ -25,6 +25,6 @@ def availableShips(passengerCount):
             if passengers.isdigit():
                 passengers = int(passengers)
                 if passengers >= passengerCount:
-                    availableShips.append(ship["name"])
+                    available_ships.append(ship["name"])
         url = data["next"]
     return available_ships
