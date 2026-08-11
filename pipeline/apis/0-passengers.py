@@ -21,7 +21,7 @@ def availableShips(passengerCount):
 
         for ship in ships:
             passengers = ship["passengers"]
-            passengers = passengers.replace("و"و "")
+            passengers = passengers.replace(",", "")
             if passengers.isdigit():
                 passengers = int(passengers)
                 if passengers >= passengerCount:
