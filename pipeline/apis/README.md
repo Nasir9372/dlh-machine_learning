@@ -6,7 +6,6 @@ This module introduces the first step in building a modern data pipeline: collec
 Data ingestion is the process of bringing external data into your system. In this project, that means fetching information from web services, handling API rules, and storing the results in a structured format for later use in a data lake or analytics workflow.
 
 ## What You Will Learn
-
 - How to make HTTP requests with Python using the Requests library
 - How to retrieve data from APIs efficiently
 - How to handle pagination to collect large datasets
