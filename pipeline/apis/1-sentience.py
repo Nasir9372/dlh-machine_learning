@@ -11,29 +11,31 @@ def sentientPlanets():
     Returns the list of names of the home
     planets of all sentient species.
     """
-    planets = []
+    home_planets = []
     url = "https://swapi-api.hbtn.io/api/species/"
 
     while url:
-
+        # request all info about species
         response = requests.get(url)
-
         data = response.json()
-
         species_list = data["results"]
 
-        for species in species_list:
-            classification = (species["classification"]).lower()
-            designation = (species["designation"]).lower()
-
-            if (classification == "sentient" or designation == "sentient"):
-                homeworld_url = species["homeworld"]
-
-                if homeworld_url:
-                    planet_response = requests.get(homeworld_url)
+        for spec in species_list:
+            # define variable for condition below
+            classification = spec.get("classification").lower()
+            designation = spec.get("designation").lower()
+            # find species with class/desig as sentient and
+            # fetch thier location (url of plannet where these
+            # species lives which is class/desig as sentient)
+            if "sentient" in classification or "sentient" in designation:
+                planet_url = spec.get("homeworld")
+                if planet_url:
+                    # fetch plannet name from planet url
+                    # means another url get open e.g.
+                    # https://swapi-api.hbtn.io/api/planets/9/
+                    # at this location we have name: coruscant
+                    planet_response = requests.get(planet_url)
                     planet_data = planet_response.json()
-                    planets.append(planet_data["name"])
-
-        url = data["next"]
-
-    return planets
+                    home_planets.append(planet_data.get("name"))
+        url = data.get("next")  # pagination
+    return home_planets
