@@ -15,11 +15,11 @@ def availableShips(passengerCount):
         data = response.json()
         ships = data["results"]
         for ship in ships:
-            passerngers = ship["passengers"]
+            passerngers = ship.get("passengers")
             passerngers = passerngers.replace(",", "")
             if passerngers.isdigit():
                 passerngers = int(passerngers)
                 if passerngers >= passengerCount:
-                    available_ships.append(ship["name"])
-        url = data["next"]
+                    available_ships.append(ship.get("name"))
+        url = data.get("next")
     return available_ships
