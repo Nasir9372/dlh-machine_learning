@@ -12,7 +12,14 @@ if __name__ == '__main__':
     Prints the location of a specific user.
     """
     url = sys.argv[1]
+    # 1 is index which represent 1st argument
+    # per task requirement this should be the url
+    # while 0 is always the script name or file name
+    # like 2-user_location.py is at 0 index and
+    # the above url when fetched it will be at index 1
+    # url = sys.argv[1], Gets the "https://api.github.com/users/john"
     response = requests.get(url)
+    # Fetches the GitHub API
     if response.status_code == 404:
         print("Not found")
 
