@@ -17,6 +17,15 @@ if __name__ == '__main__':
         print("Not found")
 
     elif response.status_code == 403:
+        # rate limit in api is control mechanism, to handle
+        # number of http user request or client can make to
+        # API within specific timeframe, e.g. per sec/min/day
+        # the purpose to prevent overloading of backend infra
+        # when rate limit exceeded, API reject user request with
+        # msg HTTP 429 too many requests
+        # X-ratelimit-limit = total allowed request
+        # X-ratelimit-remaining = total remaining request
+        # X-ratelimit-reset = time untill next window resets
         reset_time = int(response.headers["X-Ratelimit-Reset"])
         current_time = time.time()
         minutes = int((reset_time - current_time) / 60)
